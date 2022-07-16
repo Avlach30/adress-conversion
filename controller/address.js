@@ -17,8 +17,8 @@ exports.getAddress = async (req, res, next) => {
     let city;
 
     if (!id) {
-      const error = new Error('Please, address id must be required');
-      error.statusCode = 400;
+      const error = new Error('Data not found');
+      error.statusCode = 404;
       throw error;
     }
 
@@ -70,8 +70,8 @@ exports.getSubDistricts = async (req, res, next) => {
     const { kota_id } = req.body;
 
     if (!kota_id) {
-      const error = new Error('Please, input city id must be required');
-      error.statusCode = 400;
+      const error = new Error('Data not found');
+      error.statusCode = 404;
       throw error;
     }
 

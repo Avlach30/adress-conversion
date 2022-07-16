@@ -14,7 +14,6 @@ This repository used for technical selection of Software Engineer (NodeJS) posit
 ## Status Code  
   * 200 `OK`
   * 201 `Created`
-  * 400 `Bad Request`
   * 401 `Unauthorized`
   * 403 `Forbidden`
   * 404 `Not Found`
@@ -30,6 +29,7 @@ This repository used for technical selection of Software Engineer (NodeJS) posit
 ## How to test this repository in postman
   * Just import this [file](adress-conversion.postman_collection.json) to your postman workspace, so you can test this repository in postman app.
 ## Important notes
+  * Request body for get single address and get all sub district is optional, so if you can't assign request body, a response will be `404`
   * To access enpoint of get single address, you must logged in as `john doe` user.   
   Otherwise, a response will be 403 for forbidden or no permission to access.
   * To access enpoint of get all sub district from single city, you must logged in as `rocketmail` user.    
