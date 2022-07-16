@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
+const authRouter = require('./router/auth.js');
+
 const app = express();
 dotenv.config();
 
@@ -15,6 +17,9 @@ app.use((req, res, next) => {
 
   next();
 });
+
+//* Config for routers
+app.use('/api/auth', authRouter);
 
 //* Config for error response
 app.use((error, req, res, next) => {
