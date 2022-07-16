@@ -5,6 +5,7 @@
     "TOKEN_SECRET_TEXT": "$2a$08$UcyjEygcPA/XaeUp85sQjuOhithx14/Ai3D5lYPixLrMrSQG2NIFy",
     "MONGO_USER": "root",
     "MONGO_PASSWORD": "root",
-    "MONGO_DEFAULT_DB": "adress-conversion"
+    "MONGO_DEFAULT_DB": "adress-conversion",
+    "ALL_ADDRESS_URL": "https://kasirpintar.co.id/allAddress.txt"
   }
 }
