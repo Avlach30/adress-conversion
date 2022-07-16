@@ -41,7 +41,7 @@ exports.signUp = async (req, res, next) => {
       status: 201,
       message: 'Sign up successfully',
       email: email,
-    })
+    });
 
   } catch (error) {
     if (!error.statusCode) {
@@ -50,3 +50,46 @@ exports.signUp = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.logIn = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({email: email});
+
+    //* If user not found
+    if (!user) {
+      const error = new Error('Account with this email not found');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    const isEqual = await bcrypt.compare(password, user.password);
+
+    //* If compare result false (wrong password)
+    if (!isEqual) {
+      const error = new Error('Incorrect password');
+      error.statusCode = 401;
+      throw error;
+    }
+
+    //* Create jwt
+    const token = jwt.sign({
+      email: user.email,
+      id: user._id.toString()
+    }, process.env.TOKEN_SECRET_TEXT, { expiresIn: '1h' });
+
+    res.status(200).json({
+      status: 200,
+      message: 'Login successfully',
+      userId: user._id.toString(),
+      token: token,
+    });
+
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+}
