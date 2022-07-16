@@ -3,14 +3,13 @@ const axios = require('axios').default;
 
 dotenv.config();
 
-const findAddress = (array, inputData) => {
-  const item = array.find(item => item.id == inputData);
-  return item;
-};
+const arrayController = require('../utility/getArrayElement.js');
 
 exports.getAddress = async (req, res, next) => {
   try {
     const { id } = req.body;
+    const findAddress = arrayController.findItem;
+    
     let address;
     let subDistrict;
     let province;
@@ -20,6 +19,13 @@ exports.getAddress = async (req, res, next) => {
     if (!id) {
       const error = new Error('Please, address id must be required');
       error.statusCode = 400;
+      throw error;
+    }
+
+    //* Implementing permission of get single address from logged user
+    if (req.userId != '62d298e31a8f114c4497a4f6') {
+      const error = new Error('Forbidden to access');
+      error.statusCode = 403;
       throw error;
     }
 
