@@ -12,4 +12,6 @@ router.post(
   body('password').trim().isLength({min: 8}).withMessage('Please, required minimum 8 character for password'),
   authController.signUp);
 
+  router.post('/login', authController.logIn);
+
 module.exports = router;
