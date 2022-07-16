@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const { validationResult } = require('express-validator');
 
 const User = require('../model/user.js');
 
@@ -10,6 +11,14 @@ exports.signUp = async (req, res, next) => {
   const { name, email, password } = req.body;
 
   try {
+    const validationError = validationResult(req);
+    if (!validationError.isEmpty()) {
+      const error = new Error('Validation Failed');
+      error.statusCode = 400;
+      error.data = validationError.array()[0].msg;
+      throw error;
+    }
+
     const existUser = await User.findOne({ email: email });
 
     if (existUser) {
