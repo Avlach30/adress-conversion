@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 const authRouter = require('./router/auth.js');
+const addressRouter = require('./router/address.js');
 
 const app = express();
 dotenv.config();
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 
 //* Config for routers
 app.use('/api/auth', authRouter);
+app.use('/api', addressRouter);
 
 //* Config for error response
 app.use((error, req, res, next) => {
