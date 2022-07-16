@@ -5,6 +5,8 @@ const isAuthMiddleware = require('../middleware/isAuth.js');
 
 const router = express.Router();
 
-router.get('/address', isAuthMiddleware, addressController.getAddress);
+router.get('/addresses', isAuthMiddleware, addressController.getAddress);
+
+router.get('/subDistricts', isAuthMiddleware, addressController.getSubDistricts);
 
 module.exports = router;
